@@ -49,8 +49,8 @@ function showRandomQuote(){
         const randomQuote = allQuoates[(Math.floor(Math.random() * allQuoates.length))]    
         // add new text
 
-        blockQoate.textContent = `"${randomQuote['quote']}"`
-        cited.textContent = randomQuote['author']      
+        blockQoate.innerHTML = `"${randomQuote['quote']}"`
+        cited.innerHTML = randomQuote['author']      
     })
 
     blockQoate.textContent = ' '
