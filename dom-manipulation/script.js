@@ -58,7 +58,7 @@ function showRandomQuote(){
 
 }
 
-function addQuote(){
+function createAddQuoteForm(){
 
     // take user inputs for the newQuote
     let quoteText = document.getElementById('newQuoteText').value
