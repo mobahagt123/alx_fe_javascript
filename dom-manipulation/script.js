@@ -1,5 +1,7 @@
 
 
+
+
 // fetch data from API and store at local storage
 
 async function getQuoates() {
@@ -13,6 +15,10 @@ async function getQuoates() {
 
 
 function getAllQuoates(){
+    let quoates = {
+        text:quoteText,
+        category:quoteCategory
+    }
 
     let myData = JSON.parse(localStorage.getItem('quotes'))
     let myQuoates = Object.values(myData)
