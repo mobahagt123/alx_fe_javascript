@@ -1,7 +1,5 @@
 
 
-
-
 // fetch data from API and store at local storage
 
 async function getQuoates() {
@@ -15,10 +13,6 @@ async function getQuoates() {
 
 
 function getAllQuoates(){
-    let quoates = {
-        text:quoteText,
-        category:quoteCategory
-    }
 
     let myData = JSON.parse(localStorage.getItem('quotes'))
     let myQuoates = Object.values(myData)
@@ -49,8 +43,8 @@ function showRandomQuote(){
         const randomQuote = allQuoates[(Math.floor(Math.random() * allQuoates.length))]    
         // add new text
 
-        blockQoate.innerHTML = `"${randomQuote['quote']}"`
-        cited.innerHTML = randomQuote['author']      
+        blockQoate.textContent = `"${randomQuote['quote']}"`
+        cited.textContent = randomQuote['author']      
     })
 
     blockQoate.textContent = ' '
@@ -58,7 +52,7 @@ function showRandomQuote(){
 
 }
 
-function createAddQuoteForm(){
+function addQuote(){
 
     // take user inputs for the newQuote
     let quoteText = document.getElementById('newQuoteText').value
@@ -80,6 +74,53 @@ function createAddQuoteForm(){
     // store quotes again
     localStorage.setItem('quotes', JSON.stringify(qoutes))
 
+
 }
 
+
+
 showRandomQuote()
+
+
+function downloadJson(quotes, filename){
+
+    let fileToSave = new Blob([JSON.stringify(quotes)], {
+        type: 'application/json'
+    });
+
+    let url = URL.createObjectURL(fileToSave)
+
+    let link = document.createElement('a')
+    link.setAttribute('download',filename)
+
+    link.href = url
+    document.body.appendChild(link)
+    link.click()
+
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+
+}
+
+const quotes = JSON.parse(localStorage.getItem('quotes'))
+
+
+const downloadBtn = document.getElementById('download-data')
+downloadBtn.addEventListener('click', function(){
+    downloadJson(quotes, 'myFile')
+})
+
+
+
+
+
+function importFromJsonFile(event){
+    const fileReader = new FileReader()
+
+    fileReader.onload = function(event) {
+        const importedQuotes = JSON.parse(event.target.result)
+        qoutes.push(...importedQuotes);
+        saveQuotes();
+
+    }
+}
