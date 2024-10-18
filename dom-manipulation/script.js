@@ -26,32 +26,6 @@ function getAllQuoates(){
 }
 
 
-function showRandomQuote(){
-
-    const quoteBtn  = document.getElementById('newQuote')
-    const diplayQuoat = document.getElementById('quoteDisplay')
-    const allQuoates = getAllQuoates()
-    
-    const blockQoate = document.createElement('p')
-    const cited = document.createElement('cite')
-
-    // add to div container
-    diplayQuoat.appendChild(blockQoate)
-    diplayQuoat.appendChild(cited)
-
-    quoteBtn.addEventListener('click' , (event) => {
-        const randomQuote = allQuoates[(Math.floor(Math.random() * allQuoates.length))]    
-        // add new text
-
-        blockQoate.textContent = `"${randomQuote['quote']}"`
-        cited.textContent = randomQuote['author']      
-    })
-
-    blockQoate.textContent = ' '
-    cited.textContent = ' '
-
-}
-
 function addQuote(){
 
     // take user inputs for the newQuote
@@ -79,7 +53,7 @@ function addQuote(){
 
 
 
-showRandomQuote()
+
 
 
 function downloadJson(quotes, filename){
@@ -121,3 +95,103 @@ function importFromJsonFile(event){
     }
     fileReader.readAsText(event.target.files[0])
 }
+
+
+
+
+
+
+
+
+
+
+
+// adding categories options
+function populateCategories(){
+
+    // get parent element
+    const options = document.getElementById('categoryFilter')
+
+    // get quotes 
+    let quotes = JSON.parse(localStorage.getItem('quotes'))
+    let categories = Object.keys(quotes)
+
+    // create option element for each category
+    for(let category of categories){
+        const option = document.createElement('option')
+        options.appendChild(option)
+        option.setAttribute('value', category)
+        option.textContent = category
+    }
+
+
+}
+
+populateCategories()
+
+
+
+
+function filterQuotes(){
+
+    // get user caytegory choice
+    let category = document.getElementById('categoryFilter').value
+
+    // filter quotes
+
+    let quotes = JSON.parse(localStorage.getItem('quotes'))
+    
+
+    let allQuoates = []
+    if(category === 'all'){
+        let myQuoates = Object.values(quotes)
+        for(let quote of myQuoates){
+            for (let quoteText of quote){
+                allQuoates.push(quoteText)
+            }
+        }
+
+    } else {
+        let filteredQuotes = quotes[category]
+        let myQuoates = Object.values(filteredQuotes)
+        for(let quote of myQuoates){
+            allQuoates.push(quote)
+            }
+        }
+    
+    return allQuoates
+    
+}  
+   
+
+
+function showRandomQuote(){
+
+    const quoteBtn  = document.getElementById('newQuote')
+    const diplayQuoat = document.getElementById('quoteDisplay')
+    
+    const blockQoate = document.createElement('p')
+    const cited = document.createElement('cite')
+
+    // add to div container
+    diplayQuoat.appendChild(blockQoate)
+    diplayQuoat.appendChild(cited)
+
+    quoteBtn.addEventListener('click' , (event) => {
+
+        const allQuoates = filterQuotes()
+        const randomQuote = allQuoates[(Math.floor(Math.random() * allQuoates.length))]    
+        // add new text
+
+        blockQoate.textContent = `"${randomQuote['quote']}"`
+        cited.textContent = randomQuote['author']      
+    })
+
+    blockQoate.textContent = ' '
+    cited.textContent = ' '
+    
+}
+
+showRandomQuote()
+
+
