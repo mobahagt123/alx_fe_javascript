@@ -1,5 +1,5 @@
 
-let filtereQuotes = JSON.parse(localStorage.getItem('filteredQuotes'))
+
 // fetch data from API and store at local storage
 
 async function getQuoates() {
@@ -138,7 +138,7 @@ function filterQuotes(){
     
 
     let allQuoates = []
-    if(category === 'all'){
+    if(selectedCategory === 'all'){
         let myQuoates = Object.values(quotes)
         for(let quote of myQuoates){
             for (let quoteText of quote){
@@ -147,9 +147,8 @@ function filterQuotes(){
         }
 
     } else {
-        let filteredQuotes = quotes.map((item) =>{
-            item[selectedCategory]
-        })
+        let filteredQuotes = quotes[selectedCategory]
+    
         let myQuoates = Object.values(filteredQuotes)
         for(let quote of myQuoates){
             allQuoates.push(quote)
@@ -184,8 +183,6 @@ function showRandomQuote(){
         cited.textContent = randomQuote['author'] 
         
         // save filtered quoates
-        localStorage.setItem('filteredQuotes', JSON.stringify(allQuoates))
-
     })
 
     blockQoate.textContent = ' '
@@ -196,3 +193,14 @@ function showRandomQuote(){
 showRandomQuote()
 
 
+
+// JSON placeholder fake API to 
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify(quotes),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
