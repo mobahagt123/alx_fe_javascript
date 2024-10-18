@@ -152,7 +152,9 @@ function filterQuotes(){
         }
 
     } else {
-        let filteredQuotes = quotes[category]
+        let filteredQuotes = quotes.map((item) =>{
+            item[category]
+        })
         let myQuoates = Object.values(filteredQuotes)
         for(let quote of myQuoates){
             allQuoates.push(quote)
