@@ -1,6 +1,22 @@
 
+function fetchQuotesFromServer(){
 
-// fetch data from API and store at local storage
+    // fetch data from API and store at local storage
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'GET',
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then(() =>  json);
+
+}
+
+
+
+
+
 
 async function getQuoates() {
     const response = await fetch('quotes.json')
