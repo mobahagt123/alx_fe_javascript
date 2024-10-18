@@ -1,5 +1,5 @@
 
-
+let filtereQuotes = JSON.parse(localStorage.getItem('filteredQuotes'))
 // fetch data from API and store at local storage
 
 async function getQuoates() {
@@ -50,11 +50,6 @@ function addQuote(){
 
 
 }
-
-
-
-
-
 
 function downloadJson(quotes, filename){
 
@@ -135,7 +130,7 @@ populateCategories()
 function filterQuotes(){
 
     // get user caytegory choice
-    let category = document.getElementById('categoryFilter').value
+    let selectedCategory = document.getElementById('categoryFilter').value
 
     // filter quotes
 
@@ -153,7 +148,7 @@ function filterQuotes(){
 
     } else {
         let filteredQuotes = quotes.map((item) =>{
-            item[category]
+            item[selectedCategory]
         })
         let myQuoates = Object.values(filteredQuotes)
         for(let quote of myQuoates){
@@ -186,7 +181,11 @@ function showRandomQuote(){
         // add new text
 
         blockQoate.textContent = `"${randomQuote['quote']}"`
-        cited.textContent = randomQuote['author']      
+        cited.textContent = randomQuote['author'] 
+        
+        // save filtered quoates
+        localStorage.setItem('filteredQuotes', JSON.stringify(allQuoates))
+
     })
 
     blockQoate.textContent = ' '
