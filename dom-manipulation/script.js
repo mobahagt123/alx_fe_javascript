@@ -251,8 +251,6 @@ function syncQuotes(quotes){
 })
         .then((json) => quotes = json)
         .then(() => alert('data fetched succesfuly'))
-
-
-    
-
 }
+
+setInterval(syncQuotes(), 500)
