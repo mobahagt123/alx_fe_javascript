@@ -253,4 +253,4 @@ function syncQuotes(quotes){
         .then(() => alert('Quotes synced with server'))
 }
 
-setInterval(syncQuotes(), 500)
+setInterval(syncQuotes(), 500, 'Quotes synced with server')
