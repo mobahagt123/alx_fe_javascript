@@ -209,14 +209,50 @@ function showRandomQuote(){
 showRandomQuote()
 
 
+// sync data 
 
 // JSON placeholder fake API to 
-fetch('https://jsonplaceholder.typicode.com/posts', {
-    method: 'POST',
-    body: JSON.stringify(quotes),
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+
+function fetchingData(){
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify(quotes),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+
+}
+
+
+// create div container for sync 
+const syncDiv  = document.createElement('div')
+const syncBtn = document.createElement('button')
+syncBtn.setAttribute("onclick","syncQuotes()")
+document.body.appendChild(syncDiv)
+syncDiv.appendChild(syncBtn)
+syncBtn.textContent = 'Sync Quotes'
+
+function syncQuotes(quotes){
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => {
+            if(!response.ok){
+                alert('Data not Fetched successfuly')
+            }
+})
+        .then((json) => quotes = json)
+        .then(() => alert('data fetched succesfuly'))
+
+
+    
+
+}
