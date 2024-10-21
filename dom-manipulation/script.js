@@ -55,7 +55,7 @@ function addQuote(){
 
     // adding new element
     if (quoteAuthor && quoteCategory && quoteText){
-        qoutes[quoteCategory].push([{
+        qoutes[quoteCategory].map([{
             quote: quoteText,
             author: quoteAuthor
         }])
@@ -110,13 +110,6 @@ function importFromJsonFile(event){
 
 
 
-
-
-
-
-
-
-
 // adding categories options
 function populateCategories(){
 
@@ -134,8 +127,6 @@ function populateCategories(){
         option.setAttribute('value', category)
         option.textContent = category
     }
-
-
 }
 
 populateCategories()
@@ -177,7 +168,7 @@ function filterQuotes(){
    
 
 
-function showRandomQuote(){
+function displayRandomQuote(){
 
     const quoteBtn  = document.getElementById('newQuote')
     const diplayQuoat = document.getElementById('quoteDisplay')
@@ -206,7 +197,7 @@ function showRandomQuote(){
     
 }
 
-showRandomQuote()
+displayRandomQuote()
 
 
 // sync data 
@@ -251,6 +242,7 @@ function syncQuotes(quotes){
 })
         .then((json) => quotes = json)
         .then(() => alert('Quotes synced with server!'))
-}
+}  
 
 setInterval(syncQuotes(), 500, 'Quotes synced with server!')
+
