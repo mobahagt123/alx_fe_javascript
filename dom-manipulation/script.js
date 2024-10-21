@@ -168,7 +168,7 @@ function filterQuotes(){
    
 
 
-function displayRandomQuote(){
+function showRandomQuote(){
 
     const quoteBtn  = document.getElementById('newQuote')
     const diplayQuoat = document.getElementById('quoteDisplay')
@@ -186,8 +186,8 @@ function displayRandomQuote(){
         const randomQuote = allQuoates[(Math.floor(Math.random() * allQuoates.length))]    
         // add new text
 
-        blockQoate.textContent = `"${randomQuote['quote']}"`
-        cited.textContent = randomQuote['author'] 
+        blockQoate.innerHTML = `"${randomQuote['quote']}"`
+        cited.innerHTML= randomQuote['author'] 
         
         // save filtered quoates
     })
@@ -197,7 +197,7 @@ function displayRandomQuote(){
     
 }
 
-displayRandomQuote()
+showRandomQuote()
 
 
 // sync data 
